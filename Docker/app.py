@@ -22,10 +22,11 @@ S3_REGION = os.environ.get('AWS_REGION', 'us-east-1')
 # AWS Credentials for S3
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+AWS_SESSION_TOKEN = os.environ.get('AWS_SESSION_TOKEN')
 
 # Group Info 
 GROUP_NAME = os.environ.get('GROUP_NAME', 'Shruti and Maria')
-SLOGAN = os.environ.get('SLOGAN', 'We build cool things!')
+SLOGAN = os.environ.get('SLOGAN', 'Automating the Cloud, One Pod at a Time!')
 
 # Improved Database Connection Handling
 
@@ -50,7 +51,7 @@ def get_db_connection():
 # S3 Image Download Function ---
 def download_background_image():
     """Downloads the background image from a private S3 bucket to the static folder."""
-    if not all([S3_BUCKET, S3_KEY, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY]):
+    if not all([S3_BUCKET, S3_KEY, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_SESSION_TOKEN]):
         print("S3 environment variables not fully configured. Skipping download.")
         return "default.jpg" 
 
@@ -68,7 +69,8 @@ def download_background_image():
             's3',
             aws_access_key_id=AWS_ACCESS_KEY_ID,
             aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
-            region_name=S3_REGION
+            region_name=S3_REGION,
+            aws_session_token=AWS_SESSION_TOKEN
         )
         s3_client.download_file(S3_BUCKET, S3_KEY, image_local_path)
         print(f"Successfully downloaded image to {image_local_path}")
