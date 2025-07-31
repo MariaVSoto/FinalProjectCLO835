@@ -1,5 +1,5 @@
 # Ignore Kubernetes secrets file
-manifests/02_secrets.yaml
+manifests/03_secrets.yaml
 
 # Crash log files
 crash.log
