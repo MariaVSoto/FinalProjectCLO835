@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: webapp
-        image: 396561719560.dkr.ecr.us-east-1.amazonaws.com/finalproject835:latest
+        image: 396561719560.dkr.ecr.us-east-1.amazonaws.com/finalproject835:CLO835
         imagePullPolicy: Always
         ports:
         - containerPort: 81
