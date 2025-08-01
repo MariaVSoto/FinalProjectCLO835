@@ -29,6 +29,7 @@ jobs:
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
+        
 
       # Build and push MySQL image
       - name: Build,tag, and push MySQL image to Amazon ECR
@@ -37,5 +38,5 @@ jobs:
           ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY }}
           IMAGE_TAG: ${{ github.sha }} 
         run: |
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f Dockerfile .
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f Docker/Dockerfile Docker/
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
