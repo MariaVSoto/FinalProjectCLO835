@@ -51,18 +51,27 @@ def get_db_connection():
 # S3 Image Download Function ---
 def download_background_image():
     """Downloads the background image from a private S3 bucket to the static folder."""
-    if not all([S3_BUCKET, S3_KEY, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_SESSION_TOKEN]):
-        print("S3 environment variables not fully configured. Skipping download.")
-        return "default.jpg" 
+    
+    # Let's print every variable individually to be 100% sure
+    print(f"--- DEBUGGING S3 DOWNLOAD ---")
+    print(f"S3_BUCKET: {S3_BUCKET}")
+    print(f"S3_KEY: {S3_KEY}")
+    print(f"AWS_REGION: {S3_REGION}")
+    # We check if the variable exists at all
+    print(f"AWS_ACCESS_KEY_ID exists: {'Yes' if AWS_ACCESS_KEY_ID else 'No'}")
+    print(f"AWS_SECRET_ACCESS_KEY exists: {'Yes' if AWS_SECRET_ACCESS_KEY else 'No'}")
+    print(f"AWS_SESSION_TOKEN exists: {'Yes' if AWS_SESSION_TOKEN else 'No'}")
+    print(f"-----------------------------")
+
+    # We remove the 'if not all' check to force boto3 to try and fail loudly.
+    if not S3_BUCKET or not S3_KEY:
+        print("S3_BUCKET or S3_KEY is missing. Skipping download.")
+        return "default.jpg"
 
     if not os.path.exists('static'):
         os.makedirs('static')
 
     image_local_path = os.path.join('static', S3_KEY)
-    
-    # Log the background image URL
-    s3_url = f"s3://{S3_BUCKET}/{S3_KEY}"
-    print(f"Attempting to download background image from: {s3_url}")
     
     try:
         s3_client = boto3.client(
@@ -72,12 +81,17 @@ def download_background_image():
             region_name=S3_REGION,
             aws_session_token=AWS_SESSION_TOKEN
         )
+        print(f"Attempting to download s3://{S3_BUCKET}/{S3_KEY} with boto3 client...")
         s3_client.download_file(S3_BUCKET, S3_KEY, image_local_path)
         print(f"Successfully downloaded image to {image_local_path}")
         return S3_KEY 
     except Exception as e:
-        print(f"Error downloading from S3: {e}")
-        return "default.jpg" 
+        # This will now print the FULL, DETAILED error from boto3/AWS
+        print(f"!!!!!!!!!!!!!! ERROR DOWNLOADING FROM S3 !!!!!!!!!!!!!!")
+        print(f"Error Type: {type(e).__name__}")
+        print(f"Error Details: {e}")
+        print(f"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+        return "default.jpg"
 
 # --- UPDATED: Your Existing Routes ---
 

@@ -10,7 +10,7 @@ data:
   
   # S3 Background Image Configuration
   S3_BUCKET: "finalprojectclo835"
-  S3_KEY: "background.png" 
+  S3_KEY: "default.jpg" 
   AWS_REGION: "us-east-1"
 
   # Database Configuration
