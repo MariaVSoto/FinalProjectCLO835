@@ -93,7 +93,7 @@ def download_background_image():
         print(f"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         return "default.jpg"
 
-# --- UPDATED: Your Existing Routes ---
+# --- UPDATED: Existing Routes ---
 
 @app.route("/", methods=['GET', 'POST'])
 def home():
