@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp-deployment
+  namespace: fp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webapp
+  template:
+    metadata:
+      labels:
+        app: webapp
+    spec:
+      containers:
+      - name: webapp
+        image: 396561719560.dkr.ecr.us-east-1.amazonaws.com/finalproject835:CLO835
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 81
+        envFrom:
+          - configMapRef:
+              name: webapp-config
+          - secretRef:
+              name: mysql-credentials
+          - secretRef:
+              name: aws-s3-credentials
