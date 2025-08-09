@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Employee Info - {{ group_name }}</title>
+    <style>
+        body {
+            background-image: url("{{ url_for('static', filename=background_image_filename) }}");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: white;
+            text-shadow: 2px 2px 4px #000000;
+            font-family: sans-serif;
+            text-align: center;
+        }
+        .header {
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            margin: 20px auto;
+            width: 80%;
+        }
+        .container {
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
+            margin: 20px auto;
+            width: 80%;
+            text-align: left;
+            font-size: 1.2em;
+        }
+        .container h2 {
+            text-align: center;
+        }
+        .info-label {
+            font-weight: bold;
+            color: #cccccc;
+        }
+        a {
+            color: #a7d7ff;
+            font-size: 1.2em;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>{{ group_name }}</h1>
+        <h2>{{ slogan }}</h2>
+    </div>
+
+    <div class="container">
+        {% if id %}
+            <h2>Employee Information</h2>
+            <p><span class="info-label">Employee ID:</span> {{ id }}</p>
+            <p><span class="info-label">First Name:</span> {{ fname }}</p>
+            <p><span class="info-label">Last Name:</span> {{ lname }}</p>
+            <p><span class="info-label">Primary Skill:</span> {{ interest }}</p>
+            <p><span class="info-label">Location:</span> {{ location }}</p>
+        {% else %}
+            <h2>Employee Not Found</h2>
+            <p>The employee ID you entered could not be found in the database.</p>
+        {% endif %}
+    </div>
+
+    <a href="{{ url_for('home') }}">Back to Home</a>
+
+</body>
+</html>

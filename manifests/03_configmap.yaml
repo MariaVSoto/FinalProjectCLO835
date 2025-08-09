@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: webapp-config
+  namespace: fp
+data:
+  # App Info
+  GROUP_NAME: "Shruti and Maria"
+  SLOGAN: "Automating the Cloud, One Pod at a Time!"
+  
+  # S3 Background Image Configuration
+  S3_BUCKET: "finalprojectclo835"
+  S3_KEY: "background.png" 
+  AWS_REGION: "us-east-1"
+
+  # Database Configuration
+  DBHOST: "mysql-service.fp.svc.cluster.local"
+  DBPORT: "3306"
+  DATABASE: "employees"

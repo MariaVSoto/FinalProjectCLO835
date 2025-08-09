@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Add Employee - {{ group_name }}</title>
+    <style>
+        body {
+            background-image: url("{{ url_for('static', filename=background_image_filename) }}");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: white;
+            text-shadow: 1px 1px 2px #000000;
+            font-family: 'Avenir', sans-serif;
+            text-align: center;
+        }
+        .header {
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            margin: 20px auto;
+            width: 80%;
+        }
+        .container {
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
+            margin: 20px auto;
+            width: 50%;
+        }
+        input {
+            height: 25px;
+            font-size: 14pt;
+            color: #333;
+            width: 80%;
+            margin-bottom: 15px;
+        }
+        button {
+            background: #4682B4; /* SteelBlue */
+            height: 45px;
+            width: 250px;
+            color: white;
+            font-size: 14pt;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background: #5a9bd5;
+        }
+        a {
+            color: #a7d7ff;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>{{ group_name }}</h1>
+        <h2>{{ slogan }}</h2>
+    </div>
+
+    <div class="container">
+        <h2>Employee Database</h2>
+        <form action="/addemp" autocomplete="on" method="POST">
+            Employee ID:<br> <input type="number" name="emp_id" autofocus><br>
+            First Name:<br> <input type="text" name="first_name" ><br>
+            Last Name:<br> <input type="text" name="last_name"><br>
+            Primary Skill:<br> <input type="text" name="primary_skill"><br>
+            Location:<br> <input type="text" name="location"><br>
+            <button type="submit">ADD EMPLOYEE</button><br>
+        </form>
+        <form action="/getemp" method="GET">
+             <button type="submit">GET EMPLOYEE INFORMATION</button>
+        </form>
+        <br><br>
+        <a href="/about">About Us</a>
+    </div>
+</body>
+</html>

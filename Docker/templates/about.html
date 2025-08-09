@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>About - {{ group_name }}</title>
+    <style>
+        body {
+            background-image: url("{{ url_for('static', filename=background_image_filename) }}");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: white;
+            text-shadow: 2px 2px 4px #000000;
+            font-family: sans-serif;
+            text-align: center;
+        }
+        .header {
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            margin: 20px auto;
+            width: 80%;
+        }
+        .container {
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
+            margin: 20px auto;
+            width: 80%;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>{{ group_name }}</h1>
+        <h2>{{ slogan }}</h2>
+    </div>
+
+    <div class="container">
+        <h1>About Us</h1>
+        <p>This application is the final project for the CLO835 course.</p>
+        <p>It demonstrates a 2-tiered web application deployed on a managed Kubernetes cluster on AWS EKS, featuring deployment automation and integration with various AWS services like S3, ECR, and EBS.</p>
+        <br>
+        <a href="{{ url_for('home') }}" style="color: #a7d7ff;">Back to Home</a>
+    </div>
+
+</body>
+</html>
